@@ -26,3 +26,14 @@
 - To ask Angular to re-render the component, we can subscribe to the parent during ngOnInit **this.route.params.subscribe( (params: Params) => {...});**
 - Observable allows us to do async task 
 - Destroy the subscription to avoid memory leak, add OnDestry and destry the subscription inside 
+
+### Passing Query Parameters and Fragments
+- To pass query parameters we can use **[queryParams]**, it is another bindable property of the routerLink directive 
+- example  **[queryParams]="{ allowEdit: '1' }"** will have the output of **servers/5/edit?allowEdit=1**
+- To add fregment **fragment="loading"** 
+- To retrive the info from queryParam and fragment we need to inject ActivatedRoute in the model and get the info by doing **this.route.snapshot.queryParams**  **this.route.snapshot.fragment**
+- **+this.route.snapshot.params['id']** the + is so make sure the id created is a number
+
+### Setting up nested (child) route 
+- In app module we need to set up chilren route **{path: 'servers', component: ServersComponent, children: [...]}**
+- Child route need a saperate route outlet, to do that we can add **<router-outlet>** to the parent component
