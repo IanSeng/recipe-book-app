@@ -8,7 +8,7 @@
 
 ### Set active route 
 - We can use **routerLinkActive=""**
-- to ensure that the route only active the correct path **[routerLinkActiveOptions] = "{exact: true}"**
+- to ensure that the route only active the correct path **[routerLinkActiveOptions] = "{exact: true}"**, this is to avoid the issue the home page is always active 
 
 
 ### Navigating Programmatically
@@ -44,3 +44,16 @@
 
 ### Redirecting and wildcard Route (route not exists)
 - this will catch all of the invalid path and it has to be at the last piece in the route array because the route get parsed from top to bottom. ** is known as wilecard route **{ path: ' ** ', redirectTo:'/not-found'}** 
+
+### Outsourcing the Route Configuration #144
+- To keep the file organize, we can create a module for routes 
+
+### Introduction to Guards
+- For example we want to give the component router to different page when user is logged in. With the use of **CanActivate** Guard we could guard the route 
+1. create a new **uth-guard.service**
+2. create a class with the implement of **CanActivate**
+3. to protect child route we can implement the interface **CanActivateChild**
+
+### Controlling Navigation with canDeacivate 
+- witg this function implement, we can ask when user accidentally click back we will ask user to confirm 
+
