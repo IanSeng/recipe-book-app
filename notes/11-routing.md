@@ -7,7 +7,7 @@
 5. RouterLink="servers" will append to the current route. For example, current route is .../user if we click on the routerLink it will be come .../user/server (/url is absolute path; url is relative path; ../url allows us to go to the path before)
 
 ### Set active route 
-- We can use *routerLinkActive=""*
+- We can use **routerLinkActive=""**
 - to ensure that the route only active the correct path **[routerLinkActiveOptions] = "{exact: true}"**
 
 
@@ -37,3 +37,10 @@
 ### Setting up nested (child) route 
 - In app module we need to set up chilren route **{path: 'servers', component: ServersComponent, children: [...]}**
 - Child route need a saperate route outlet, to do that we can add **<router-outlet>** to the parent component
+
+### To Query Parameters 
+- we can query the by using **this.route.queryParams**
+- to not loss the query after going to different route we can use queryParamsHandling: 'preserve'. Example, **this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'})**
+
+### Redirecting and wildcard Route (route not exists)
+- this will catch all of the invalid path and it has to be at the last piece in the route array because the route get parsed from top to bottom. ** is known as wilecard route **{ path: ' ** ', redirectTo:'/not-found'}** 
