@@ -55,5 +55,12 @@
 3. to protect child route we can implement the interface **CanActivateChild**
 
 ### Controlling Navigation with canDeacivate 
-- witg this function implement, we can ask when user accidentally click back we will ask user to confirm 
+- with this function implement, we can ask when user accidentally click back we will ask user to confirm 
+- video 149 for more 
+
+### Passing Static Data to a Route
+- to do this we can add data property to the one of the path in appRoutes array and get the data by using snapshot
+
+### Passing dynamic data with the resolve Guard
+- this is very important when using async data (check back video 151)
 
