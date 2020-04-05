@@ -1,6 +1,6 @@
 ## Pipes to trasnform output
 ### What is Pieps?
-1. Allows us to trasnform output in the templete. 
+1. Allows us to trasnform output in the templete. For example transform a the string out output 
 2. There are pieps for async and sync. 
 3. uppercase is a built in pipes to use it, **{{ "string" | uppercase }}**
 4. To generate pipe **ng generate pipe name**
