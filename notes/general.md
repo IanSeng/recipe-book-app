@@ -5,3 +5,4 @@
 - [ ngClass ] attribute's class name
 - {{ }} string interpolation
 - AppModule is the highest possible level
+- Memory leak is memory store data we no longer need. 
