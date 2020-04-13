@@ -1,6 +1,6 @@
 ## Pipes to trasnform output
 ### What is Pieps?
-1. Allows us to trasnform output in the templete. For example transform a the string out output 
+1. Allows us to trasnform output in the templete. 
 2. There are pieps for async and sync. 
 3. uppercase is a built in pipes to use it, **{{ "string" | uppercase }}**
 4. To generate pipe **ng generate pipe name**
@@ -14,4 +14,8 @@
 5. in transform method we can add arguments so that we can pass one parameter to the pipes **{{ data| pipename : valueToPassIn }}**
 6. pipe can be also used in *ngFor
 7. we can force the pipe to updated whenever the data changed by adding **pure: false** to pipe decorator. This might lead to performance issue and has to be careful when using it
+
+### Pipe to handle async
+1. if we need Angular to change text when the async is done, we can add **{{ data | async }}**
+2. with async it recognize that this a promise
 
