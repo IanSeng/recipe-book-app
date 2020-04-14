@@ -8,6 +8,9 @@
 ### Using type with HTTP 
 1. To make sure angular do a type check we can add type to pipe for the calling to ensure it respond with what we wanted 
 2. With type check we can access to element for example we can console.log(respond[0].something)
-3. Another way of adding type check instead of doing it at pipe map, we can add <type> to **get** call.Ex. ```
+3. Another way of adding type check instead of doing it at pipe map, we can add <type> to **get** call.Ex. 
+```
 get<{ [key: string]: Post}>
 ```
+
+### Service for http request
