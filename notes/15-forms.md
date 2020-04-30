@@ -63,3 +63,30 @@ Note:
 
 ### Using Form Data
 1. to get value from the form, we can do value function to access to the data. e.x. `form.value...`
+
+### Resetting Form
+1. we can reset the form by calling `.reset()`
+
+
+## TD Form  
+
+### Setup form
+1. In test file we need to create a `FormGroup`
+2. In tamplate approach we use **ngForm** and it is actually wapping **FormGroup**. In Angular a form is a group of controls.
+3. we need to import `ReactiveFromModule` 
+
+### Creating a reactive Form in Code 
+1. **ngOnInit()** need to be initiallize after the **FormGrouo** to satisfies the Angular lifecycle. 
+2. We need to create `new FormGroup({ ... })` and add controls into it. Control is the object we are going to pass into this **FormGroup({})**
+3. e.x. we can add add `'username': new FormControl(null)` we can pass thing into **FormControl()** such as default text or so on, but we can put **null**
+
+### Syncing HTML and Form
+1. to Syncing HTML input with **FormGroup**.  To overwrite the <From> behaviour we need to add `[formGroup]="signUpForm` and set up property binding.
+2. To add control into **input field** we need to add e.x.`FormControlName="userName"` to pass the string of the name form control 
+
+### Submitting the reactive form 
+1. add `(ngSubmit)="onSubmit()"` method into form. What different from the template approach is that we dont need local refrence ex **onSubmit(f)**, because we created the from already in typescript file
+2. To access to the form we can easily do it in typescript e.x. `this.signupForm`
+
+### Adding validation for reactive form
+1. we are not configuring anything like template apporach we add **required** as one of the **<input>** element. We can pass **Validator** and pass it into **FormControl**. e.x. new **FromControl(null, Validators.required)**
