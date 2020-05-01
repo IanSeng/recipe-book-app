@@ -90,3 +90,27 @@ Note:
 
 ### Adding validation for reactive form
 1. we are not configuring anything like template apporach we add **required** as one of the **<input>** element. We can pass **Validator** and pass it into **FormControl**. e.x. new **FromControl(null, Validators.required)**
+2. For validator field, we can have multiple validations but passing an array of validators. 
+
+### Getting Access to Controls 
+1. To diplay error we can use access to the control by accessing to the overall form. e.x. `signupForm.get('username').valid`. 
+2. use case is to show error message if user did not input after touched or input a invalid input and so on
+3. we can style the invalid input border by doing `input.ng-touched.ng-invalid` 
+
+### Grouping controls in reactive form 
+1. un ts file **formGroup** we can have a nested form group to wrap controls inside the a nested **formgroup**. e.x.
+```
+this.signupForm = new FormGroup({
+  'userData': new FormGroup({
+    ... //control can go in here 
+  })
+})
+```
+2. after that we need to make sure our html synchronize with the group by wrap the control field into another formgroup.
+e.x. 
+```
+<form [formGroup="signupForm]>
+  <div formGroupName="userData">
+<form>
+```
+3. since we are using neste when we use the singupForm get method, we need to make sure the method get the correct path e.x. `singupForm.get('userData.userName')
