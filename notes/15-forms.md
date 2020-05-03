@@ -114,3 +114,36 @@ e.x.
 <form>
 ```
 3. since we are using neste when we use the singupForm get method, we need to make sure the method get the correct path e.x. `singupForm.get('userData.userName')
+
+### Arrays of Form Control 
+1. Use case **dynamically add form control**, ex user add their hobby into the form. 
+2. Instead of using a FromControl or Group, we need to use **FormArray** as it allows us to have multiple or no form control. 
+3. To add new **formControl** into **FromArray**, We need first access to the form and get the Array. E.x. `this.signupForm.get('hobbie')` this is what we to in the past but for array `<FormArray>this.signupForm.get('hobbie')` we need to tell Angular this is a FormArray. 
+4. To push new Form control we can create a const e.x. `const control = new FormControl(null, Validators.required)` for the purpose of clean code and then `<FormArray>this.signupForm.get('hobbie').push(control)` 
+5. Synchronize with html code, in the **<div>** of the dyanamic field, we need to add fromArrayName as the element in the tag e.x. `<div formArrayName="hobbie">`
+6. We then need a for loop to loop all of the controls 
+
+### Creating custom validators 
+1. Example we can create an array of forbidden user names and use new validators to make sure the user cannot sign up with those names. 
+2. A validator is a function, return a boolen. Do a check of input and then return. **Return null** is the input pass the check. We can use indexOf to check if the input is in the array of forbidden user names. Note: index of forbidden will return -1 if the input is not inside the array. 
+3. When adding a customized validators method into FormControl, we need to make sure that we use **.bind** to invoke customized validators method only when user type into the field 
+
+### Using Error codes from custom validator
+1. we fine tunning the html by making sure the invalid message is dynamic. 
+
+### Creating a custom async validator
+1. In real life, we might need to get the validate data from the server and it could take sometime. We need **async** to wait.
+2. Created a mehotd, this validator will return Promise<any> or Observable<any>. 
+3. create a new Promise function with resolve and reject. For this project purpose we will use set time up as example. 
+4. Add it to the FromControl 
+
+### Reacting to status or value 
+1. If we want to debut the form, we can subscribe to the form and console log the status and so on. e.x. `this.signupForm.valueChanges.subscribe(value => {console.log(value)})`
+
+### Setting and Patching values
+1. we can set the value of the form by using **setValue** function. e.x. `this.signupForm.setValue({
+  'userData':{
+    'usernmae:""
+  }
+  ...
+})
