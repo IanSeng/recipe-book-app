@@ -7,6 +7,11 @@
 - 2. Reactive 
   - Define the structure of the form in TypeScript 
 
+## General 
+- #abc is in tag is known as local refrences 
+- Always remember to put **ngModel** in TD approach in order to register the control for form
+- In TD we can use  `pattern="^[1-9]+[0-9]*$"` to make sure the input amount is positive number
+
 ## TD Form 
 
 ### Creating TD form and Registering the controls (185)
@@ -141,9 +146,13 @@ e.x.
 1. If we want to debut the form, we can subscribe to the form and console log the status and so on. e.x. `this.signupForm.valueChanges.subscribe(value => {console.log(value)})`
 
 ### Setting and Patching values
-1. we can set the value of the form by using **setValue** function. e.x. `this.signupForm.setValue({
+1. we can set the value of the form by using **setValue** function. e.x. 
+```
+this.signupForm.setValue({
   'userData':{
-    'usernmae:""
+    'usernmae:'abc',
+    'email:'test@ad.com'
   }
   ...
 })
+```
