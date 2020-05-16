@@ -1,11 +1,14 @@
-import { AuthResponseData, AuthAccount, authAccount } from './account.modal';
+import { AuthResponseData, AuthAccount, User } from './account.modal';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs'; // it will throw error in observable
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, BehaviorSubject } from 'rxjs'; // it will throw error in observable
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+    // BehaviourSubject is almost identical to subject but it will emit data even before the observable is being subscribed
+    user = new BehaviorSubject<User>(null);
+
     constructor(private http: HttpClient) { }
 
     signup(signupAccount: AuthAccount) {
@@ -16,7 +19,10 @@ export class AuthService {
                 password: signupAccount.password,
                 returnSecureToken: true,
             }
-        ).pipe(catchError(this.handleError));
+        ).pipe(catchError(this.handleError),
+            tap(resData => {
+                this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+            }));
 
     }
 
@@ -28,7 +34,21 @@ export class AuthService {
                 password: loginAccount.password,
                 returnSecureToken: true,
             }
-        ).pipe(catchError(this.handleError));
+        ).pipe(catchError(this.handleError),
+            tap(resData => {
+                this.handleAuthentication(resData.email, resData.idToken, resData.localId, +resData.expiresIn);
+            }));
+    }
+
+    private handleAuthentication(email: string, token: string, id: string, expiresIn: number) {
+        // since the return date is in second and newDate.getTIme is in milisec thus we need to times 1000
+        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+        const user = new User(
+            email,
+            id,
+            token,
+            expirationDate);
+        this.user.next(user);
     }
 
     private handleError(errorRes: HttpErrorResponse) {

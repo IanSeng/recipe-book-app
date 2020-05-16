@@ -16,7 +16,7 @@
       (window:resize)="collapsed = true"
     >
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a routerLink="/recipes">Recipes</a></li>
+        <li routerLinkActive="active"><a routerLink="/recipes" *ngIf="user$ | async">Recipes</a></li>
         <li routerLinkActive="active">
           <a routerLink="/shopping-list">Shoping List</a>
         </li>
@@ -25,7 +25,10 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>
+        <li>
+          <a style="cursor: pointer;"  *ngIf="!user$ | async">Logout</a>
+        </li>
+        <li class="dropdown" appDropdown  *ngIf="user$ | async">
           <a style="cursor: pointer;" class="dropdown-toggle" role="button"
             >Manage <span class="caret"></span
           ></a>
