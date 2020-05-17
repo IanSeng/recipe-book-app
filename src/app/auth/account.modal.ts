@@ -16,13 +16,13 @@ export interface AuthResponseData {
 
 export class User {
     constructor(
-        public emai: string,
+        public email: string,
         public id: string,
         private _token: string,
-        private _tokenExplirationDate: Date) { }
+        private _tokenExpirationDate: Date) { }
 
     get token() {
-        if (!this._tokenExplirationDate || new Date() > this._tokenExplirationDate) {
+        if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
             return null;
         }
         return this._token;
