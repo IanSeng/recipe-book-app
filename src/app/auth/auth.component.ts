@@ -1,8 +1,10 @@
+import { PlaceholderDirective } from './../shared/placeholder/placeholder.directive';
+import { AlertComponent } from './../shared/alert/alert.component';
 import { AuthService } from './auth.service';
 import { AuthAccount, AuthResponseData } from './account.modal';
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,12 +12,15 @@ import { Router } from '@angular/router';
     templateUrl: './auth.component.html'
 })
 
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
     isLoginMode = true;
     isLoading = false;
     error: string = null;
+    @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
 
-    constructor(private authService: AuthService, private router: Router) { }
+    private modelClosesubscription: Subscription;
+
+    constructor(private authService: AuthService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver) { }
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
@@ -47,11 +52,36 @@ export class AuthComponent {
             error => {
                 console.log(error);
                 this.error = error;
+                this.showErrorAlert(error);
                 this.isLoading = false;
             }
         );
 
         form.reset();
 
+    }
+    onHandleError() {
+        this.error = null;
+    }
+    // Progammatic way of creating model but not very suggested if we can just use ng if to solve this problem
+    private showErrorAlert(message: string) {
+        // component factory resolver is used to call a component 
+        const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+        const hostViewContainerRef = this.alertHost.viewContainerRef;
+        hostViewContainerRef.clear();
+
+        const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
+
+        componentRef.instance.message = message;
+        this.modelClosesubscription = componentRef.instance.closeModal.subscribe(() => {
+            this.modelClosesubscription.unsubscribe();
+            hostViewContainerRef.clear();
+        });
+    }
+
+    ngOnDestroy() {
+        if (this.modelClosesubscription) {
+            this.modelClosesubscription.unsubscribe();
+        }
     }
 }
