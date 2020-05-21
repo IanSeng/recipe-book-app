@@ -45,12 +45,10 @@ export class AuthComponent implements OnDestroy {
 
         authObservable.subscribe(
             response => {
-                console.log(response);
                 this.isLoading = false;
                 this.router.navigate(['/recipes']);
             },
             error => {
-                console.log(error);
                 this.error = error;
                 this.showErrorAlert(error);
                 this.isLoading = false;
