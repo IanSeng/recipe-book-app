@@ -4,6 +4,7 @@ import { ShoppingListComponent } from './shopping-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoggingService } from '../logging.service';
 @NgModule({
     declarations: [
         ShoppingListComponent,
@@ -13,7 +14,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        ShoppingListRoutingModule
+        ShoppingListRoutingModule,
     ],
+   // providers: [LoggingService]
 })
 export class ShoppingListModule { }
