@@ -13,6 +13,10 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   recipeForm: FormGroup;
 
+  // Getter property allow us to us it like a property in template
+  get ingredientsControls() {
+    return (this.recipeForm.get('ingredients') as FormArray).controls;
+  }
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit() {
@@ -62,11 +66,11 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value)
     }
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  onCancel(){
-    this.router.navigate(['../'], {relativeTo: this.route})
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route })
   }
 
   onAddIngredient() {
@@ -78,7 +82,7 @@ export class RecipeEditComponent implements OnInit {
     )
   }
 
-  onDeleteIngredient(index: number){
+  onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
