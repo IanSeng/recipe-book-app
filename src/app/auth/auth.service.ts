@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { AuthResponseData, AuthAccount, User } from './account.modal';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -16,7 +17,7 @@ export class AuthService {
 
     signup(signupAccount: AuthAccount) {
         return this.http.post<AuthResponseData>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDn5e79rVKNvR2iz7QanEIejhTw-XM4vmI',
+            `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
             {
                 email: signupAccount.email,
                 password: signupAccount.password,
@@ -31,7 +32,7 @@ export class AuthService {
 
     login(loginAccount: AuthAccount) {
         return this.http.post<AuthResponseData>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDn5e79rVKNvR2iz7QanEIejhTw-XM4vmI',
+            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`,
             {
                 email: loginAccount.email,
                 password: loginAccount.password,
