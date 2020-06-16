@@ -1,0 +1,3 @@
+## Lazy Loading 
+1. When we are not using loading, everything is being loaded when we visit a page. Only load the code belongs to the area
+2. 
