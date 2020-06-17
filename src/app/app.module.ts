@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     SharedModule,
     CoreModule,
+    
   ],
   bootstrap: [AppComponent],
   //providers: [LoggingService]
