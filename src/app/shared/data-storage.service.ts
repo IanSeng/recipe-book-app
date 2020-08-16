@@ -16,8 +16,7 @@ export class DataStorageService {
                 console.log(response);
             }
         );
-
-    }
+    };
 
     fetchRecipes() {
         return this.http.get<Recipe[]>('https://learn-recipe-book.firebaseio.com/recipes.json')
